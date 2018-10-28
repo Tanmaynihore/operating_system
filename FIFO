@@ -1,0 +1,47 @@
+#include<iostream> 
+using namespace std; 
+int main() 
+ {
+int reference_string[10], page_faults = 0, m, n, s, pages, frames;
+ cout<<"\nEnter Total Number of Pages:\t";
+ cin>>pages;
+  for(m = 0; m < pages; m++)
+      {
+            cout<<"Value No.:\t"<< m + 1;
+            cin>>reference_string[m];
+      }
+    cin>>frames;
+    int temp[frames];
+      for(m = 0; m < frames; m++)
+      {
+            temp[m] = -1;
+      }
+      for(m = 0; m < pages; m++)
+      {
+            s = 0;
+            for(n = 0; n < frames; n++)
+            {
+                  if(reference_string[m] == temp[n])
+                  {
+                        s++;
+                        page_faults--;
+                  }
+            }     
+            page_faults++;
+            if((page_faults <= frames) && (s == 0))
+            {
+                  temp[m] = reference_string[m];
+            }   
+            else if(s == 0)
+            {
+                  temp[(page_faults - 1) % frames] = reference_string[m];
+            }
+            cout<<"\n";
+            for(n = 0; n < frames; n++)
+            {     
+                  cout<<temp[n];
+            }
+      } 
+      cout<<page_faults;
+      return 0;
+}
